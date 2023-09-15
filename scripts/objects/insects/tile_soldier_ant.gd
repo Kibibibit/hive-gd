@@ -1,30 +1,28 @@
 extends Tile
 class_name TileSoldierAnt
 
+func get_bug_name() -> String:
+	return "soldier ant"
 
+func _valid_moves(game_state: GameState) -> Array[Hex]:
+	var out: Array[Hex] = []
 
-func get_reachable_tiles(board: GameBoard) -> Array[Vector2i]:
-	var current_pos: int = HexGrid.get_coord_id_v(hex_pos)
-	
+	var current_id: int = self.hex.get_id()
 	var explored: Array[int] = []
-	var stack: Array[Vector2i] = [hex_pos]
-	var out: Array[Vector2i] = []
+	var stack: Array[Hex] = [self.hex]
 	
 	while !stack.is_empty():
-		var next: Vector2i = stack.pop_back()
-		var next_id: int = HexGrid.get_coord_id_v(next)
-		
+		var next: Hex = stack.pop_back()
+		var next_id: int = next.get_id()
 		if (!next_id in explored):
 			explored.append(next_id)
-			if (next_id != current_pos):
+			if (next_id != current_id):
 				out.append(next)
-			for neighbour in board.get_slideable_neighbours(next):
+			for neighbour in game_state.get_slideable_neighbours(next):
 				if (
-					board.tile_connected(neighbour, [current_pos]) && 
-					board.tile_empty(neighbour) && 
-					!HexGrid.get_coord_id_v(neighbour) in explored
+					game_state.valid_edge(neighbour, self.hex) && 
+					!neighbour.get_id() in explored
 				):
 					stack.append(neighbour)
-			
 	
 	return out

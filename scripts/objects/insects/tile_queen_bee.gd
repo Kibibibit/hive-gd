@@ -1,11 +1,13 @@
 extends Tile
 class_name TileQueenBee
 
+func get_bug_name() -> String:
+	return "queen bee"
 
+func _valid_moves(game_state: GameState) -> Array[Hex]:
+	var out: Array[Hex] = []
 
-func get_reachable_tiles(board: GameBoard) -> Array[Vector2i]:
-	var out: Array[Vector2i] = []
-	for n in board.get_slideable_neighbours(hex_pos):
-		if (board.tile_connected(n, [HexGrid.get_coord_id_v(hex_pos)])):
+	for n in game_state.get_slideable_neighbours(self.hex):
+		if (game_state.valid_edge(n, self.hex)):
 			out.append(n)
 	return out

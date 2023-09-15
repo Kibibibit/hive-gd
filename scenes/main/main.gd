@@ -3,11 +3,15 @@ extends Node
 
 
 func _ready():
-	var board: GameBoard = GameBoard.new()
+	var game_state: GameState = GameState.new()
 	
-	board.grid.get_at_v(Vector2i(1,0)).tiles.append(1)
-	board.grid.get_at_v(Vector2i(-1, 1)).tiles.append(1)
-	board.grid.get_at_v(Vector2i(0,1)).tiles.append(1)
+	var queen = TileQueenBee.new()
+	queen.hex = Hex.axial(1,0)
+	#var bug2 = TileQueenBee.new()
+	#bug2.hex = Hex.axial(-1, 0)
+	
+	game_state.place_tile(queen)
+	#game_state.place_tile(bug2)
 	
 	var bugs: Array[Tile] = [
 		TileQueenBee.new(),
@@ -18,11 +22,8 @@ func _ready():
 	]
 	
 	for bug in bugs:
-		bug.hex_pos = Vector2i(0,0)
-		board.grid.get_at_v(Vector2i(0,0)).tiles.clear()
-		board.grid.get_at_v(Vector2i(0,0)).tiles.append(bug.get_instance_id())
-		print(bug)
-		print(board.can_move_tile(bug))
-		print(bug.get_reachable_tiles(board))
-		print("-")
+		bug.hex = Hex.axial(0,0)
+		game_state.place_tile(bug)
+		print(bug.get_bug_name(),":",bug.get_valid_moves(game_state))
+		game_state.remove_tile(bug)
 
