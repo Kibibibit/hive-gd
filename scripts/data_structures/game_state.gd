@@ -1,12 +1,22 @@
 extends RefCounted
 class_name GameState
 
-
+const PLAYER_BLACK: int = 0
+const PLAYER_WHITE: int = 1
 
 
 var grid: Dictionary = {}
 var tiles: Array[int] = []
 
+var current_player: int
+
+var players: Array[Player]
+
+func _init() -> void:
+	current_player = [PLAYER_BLACK,PLAYER_WHITE].pick_random()
+	players.resize(2)
+	players[PLAYER_BLACK] = Player.new(PLAYER_BLACK)
+	players[PLAYER_WHITE] = Player.new(PLAYER_WHITE)
 
 func place_tile(tile: Tile) -> void:
 	var tile_hex_id: int = tile.hex.get_id()

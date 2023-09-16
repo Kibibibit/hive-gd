@@ -17,3 +17,6 @@ func _valid_moves(game_state: GameState) -> Array[Hex]:
 			check_pos = check_pos.add(direction)
 		out.append(check_pos)
 	return out
+
+func get_insect_sprite() -> String:
+	return Asset.SPRITE_GRASSHOPPER

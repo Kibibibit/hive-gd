@@ -26,3 +26,7 @@ func _valid_moves(game_state: GameState) -> Array[Hex]:
 					stack.append(neighbour)
 	
 	return out
+
+
+func get_insect_sprite() -> String:
+	return Asset.SPRITE_SOLDIER_ANT

@@ -36,3 +36,6 @@ func dfs_step(game_state: GameState, depth: int, next: Hex, explored:Array[int],
 	return out
 					
 	
+
+func get_insect_sprite() -> String:
+	return Asset.SPRITE_SPIDER

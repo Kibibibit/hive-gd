@@ -1,29 +1,26 @@
-extends Node
+extends Node2D
 
 
+const LOADING: int = 0
+const GAME: int = 1
+
+var loading_screen_scene = preload("res://scenes/loading_screen/loading_screen.tscn")
+var game_screen_scene = preload("res://scenes/game_screen/game_screen.tscn")
+
+var current_scene: Node2D
+var game_state: int = LOADING
 
 func _ready():
-	var game_state: GameState = GameState.new()
-	
-	var queen = TileQueenBee.new()
-	queen.hex = Hex.axial(1,0)
-	#var bug2 = TileQueenBee.new()
-	#bug2.hex = Hex.axial(-1, 0)
-	
-	game_state.place_tile(queen)
-	#game_state.place_tile(bug2)
-	
-	var bugs: Array[Tile] = [
-		TileQueenBee.new(),
-		TileGrasshopper.new(),
-		TileSoldierAnt.new(),
-		TileBeetle.new(),
-		TileSpider.new()
-	]
-	
-	for bug in bugs:
-		bug.hex = Hex.axial(0,0)
-		game_state.place_tile(bug)
-		print(bug.get_bug_name(),":",bug.get_valid_moves(game_state))
-		game_state.remove_tile(bug)
+	var loading_screen: LoadingScreen = loading_screen_scene.instantiate()
+	loading_screen.loading_complete.connect(_loading_complete)
+	current_scene = loading_screen
+	add_child(loading_screen)
 
+
+func _loading_complete():
+	remove_child(current_scene)
+	current_scene.queue_free()
+	
+	current_scene = game_screen_scene.instantiate()
+	add_child(current_scene)
+	

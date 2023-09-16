@@ -1,6 +1,8 @@
 extends Tile
 class_name TileQueenBee
 
+
+
 func get_bug_name() -> String:
 	return "queen bee"
 
@@ -11,3 +13,7 @@ func _valid_moves(game_state: GameState) -> Array[Hex]:
 		if (game_state.valid_edge(n, self.hex)):
 			out.append(n)
 	return out
+
+
+func get_insect_sprite() -> String:
+	return Asset.SPRITE_QUEEN_BEE

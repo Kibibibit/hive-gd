@@ -15,3 +15,7 @@ func _valid_moves(game_state: GameState) -> Array[Hex]:
 		if (can_slide || can_climb):
 			out.append(n)
 	return out
+
+
+func get_insect_sprite() -> String:
+	return Asset.SPRITE_BEETLE
