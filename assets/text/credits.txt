@@ -1,0 +1,8 @@
+# CREDITS for HIVE GD
+## Based on the board game by John Yianni
+
+Programming: Daniel Mills
+Art: Daniel Mills (Based on the art by John Yianni)
+
+## Special Thanks
+Amit Patel (redblobgames)
