@@ -3,9 +3,10 @@ class_name TileNode
 
 var hex_sprite: Sprite2D
 var insect_sprite: Sprite2D
+var tile: Tile
 
-func _init(tile: Tile) -> void:
-	
+func _init(p_tile: Tile) -> void:
+	tile = p_tile
 	hex_sprite = _create_sprite(tile.get_hex_sprite())
 	insect_sprite = _create_sprite(tile.get_insect_sprite())
 	insect_sprite.z_index = 1

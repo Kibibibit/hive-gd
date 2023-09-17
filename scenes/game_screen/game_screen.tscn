@@ -1,6 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://bkdxgngkrvs1f"]
+[gd_scene load_steps=6 format=3 uid="uid://bkdxgngkrvs1f"]
 
 [ext_resource type="Script" path="res://scenes/game_screen/game_screen.gd" id="1_7h1hq"]
+[ext_resource type="Texture2D" uid="uid://dninftop7cjlf" path="res://assets/sprites/background_tile.png" id="2_bgiim"]
+[ext_resource type="Script" path="res://scripts/nodes/background_sprite.gd" id="3_bfdsw"]
+[ext_resource type="Texture2D" uid="uid://nelxv2n0kfi1" path="res://assets/sprites/tile_highlight.png" id="4_24doe"]
+[ext_resource type="Script" path="res://scripts/nodes/tile_highlight.gd" id="5_tiwq7"]
 
 [node name="GameScreen" type="Node2D"]
+texture_filter = 1
 script = ExtResource("1_7h1hq")
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -200
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("2_bgiim")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 1000, 500)
+script = ExtResource("3_bfdsw")
+
+[node name="UIRoot" type="Node2D" parent="."]
+z_index = 200
+
+[node name="TileHighlight2" type="Sprite2D" parent="UIRoot"]
+texture = ExtResource("4_24doe")
+centered = false
+script = ExtResource("5_tiwq7")

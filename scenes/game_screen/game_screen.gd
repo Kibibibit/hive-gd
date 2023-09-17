@@ -7,15 +7,30 @@ var game_state: GameState
 func _ready() -> void:
 	game_state = GameState.new()
 	
-	for i in game_state.players[0].tiles_left.size():
-		var tile_a: TileNode = TileNode.new(game_state.players[0].tiles_left[i])
-		var tile_b: TileNode = TileNode.new(game_state.players[1].tiles_left[i])
-		tile_a.position.x += 32*i
-		tile_b.position.x += 16 + (32*i)
-		tile_b.position.y += 24
+	var center: Hex = Hex.axial(10,10)
 	
-		add_child(tile_a)
-		add_child(tile_b)
+	var positions: Array[Hex] = center.spiral(3)
+	
+	print(positions)
+	
+	
+	var player_code: int = 0
+	var tile_code: int = 0
+	
+	for i in positions.size():
+		var hex: Hex = positions[i]
+		var tile: Tile = game_state.players[player_code].tiles_left[tile_code]
+		tile.hex = hex
+		print(tile)
+		var tile_node: TileNode = TileNode.new(tile)
+		tile_node.position = tile.hex.to_pixel_coords()
+		add_child(tile_node)
+		tile_code += 1
+		if (tile_code > 10):
+			tile_code = 0
+			player_code += 1
+		if (player_code > 1):
+			break
 	
 
 

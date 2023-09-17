@@ -7,7 +7,6 @@ var player_code: int
 
 
 
-
 func get_bug_name() -> String:
 	return "ABSTARCT TILE!"
 
@@ -31,3 +30,6 @@ func get_hex_sprite() -> String:
 
 func get_insect_sprite() -> String:
 	return "IMPLEMENT ME"
+
+func _to_string() -> String:
+	return "{%s %s @ %s, %s}" % [PlayerCode.player_name(player_code), get_bug_name(), hex, hex.to_pixel_coords()]
